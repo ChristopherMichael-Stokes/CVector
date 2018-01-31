@@ -10,7 +10,10 @@ int main(void)
     for (int i = 0; i < v->size; ++i)
         printf("%d\t", v->inner_array[i]);
     putchar('\n');
-    printf("%d\n",v->max_capacity);
-    printf("%d\n",v->size);
+    printf("capacity: %d\n",v->max_capacity);
+    printf("size: %d\n",v->size);
+    vec_shrink_to_fit(v);
+    printf("capacity: %d\n",v->max_capacity);
+    printf("size: %d\n",v->size);
     return 0;
 }

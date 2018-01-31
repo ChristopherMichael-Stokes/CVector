@@ -7,7 +7,7 @@
 //array, and reallocating entire struct when needed
 //hence variableLengthArray_vector
 
-enum sizes { INITIAL_SIZE=5, SHRINK_RATIO=3 };
+enum sizes { INITIAL_SIZE=5 };
 
 vector * _init_vector(int size)
 {
@@ -39,20 +39,36 @@ void free_vec(vector * v)
 void vec_push_back(vector * v, int x) 
 {
     if (v->size == v->max_capacity) {
+
+        /* basic implementation
         //make a duplicate array, with double the size of v
         vector * copy = init_sized_vector(v->size*2); 
-        for (int i = 0; i < v->size; ++i) {
+        for (int i = 0; i < v->size; ++i)
             copy->inner_array[i] = v->inner_array[i];
-
-        }
         copy->size = v->size;
         *v = *copy;
         free_vec(copy);
+        */
+
+        //better implementation using realloc
+        assert((v = realloc(v, sizeof(int)*(v->max_capacity*=2) +
+                sizeof(vector))) != NULL);
+
     }
     v->inner_array[v->size++] = x;
 }
 
 void vec_pop_back(vector * v)
 {
-    
+    v->size--;
+}
+
+//costly as it makes a new vector, only use where memory is 
+//limited
+void vec_shrink_to_fit(vector * v)
+{
+    if (!(v->size == v->max_capacity)) {
+        assert((v = realloc(v, sizeof(int)*(v->max_capacity=v->size) +
+                sizeof(vector))) != NULL);
+    }
 }
