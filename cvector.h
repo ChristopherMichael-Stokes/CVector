@@ -2,7 +2,8 @@
 #define __cvector_h
 
 typedef struct { 
-    int max_capacity, size, inner_array[0];
+    unsigned max_capacity, size;
+    int inner_array[0];
 } vector;
 
 enum sizes;
