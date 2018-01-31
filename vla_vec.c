@@ -60,7 +60,8 @@ void vec_push_back(vector * v, int x)
 
 void vec_pop_back(vector * v)
 {
-    v->size--;
+    if (v->size > 0)
+        v->size--;
 }
 
 //costly as it makes a new vector, only use where memory is 
