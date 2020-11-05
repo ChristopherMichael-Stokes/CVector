@@ -11,9 +11,9 @@ enum sizes { INITIAL_SIZE=5 };
 
 vector * _init_vector(int size)
 {
-    vector * v = malloc(sizeof(int)*size + sizeof(vector));
-    v->max_capacity = size;
-    v->size = 0;
+    vector * v = malloc(sizeof(int)*size*2 + sizeof(vector));
+    v->max_capacity = size*2;
+    v->size = size;
     return v;
 }
 
@@ -73,3 +73,63 @@ void vec_shrink_to_fit(vector * v)
                 sizeof(vector))) != NULL);
     }
 }
+
+void print_vec(vector * v) {
+	for (int i = 0; i < v->size; ++i) {
+		printf("%d  ", v->inner_array[i]);
+	}
+	putchar('\n');
+}
+
+enum operation { ADD, MULTIPLY, SUBTRACT, DIVIDE };
+typedef enum operation operation;
+
+vector * _vec_arithmetic(operation op, vector * v1, vector * v2) {
+	//TODO refactor to work for variable arguments
+	
+	// use the size of the smallest vector
+	size_t size = v1->size < v2->size ? v1->size : v2->size;
+	
+	vector * v3 = init_sized_vector(size);
+
+	int x;
+	for (int i = 0; i < size; ++i) {
+		switch(op) {
+			default : 
+			case ADD : 
+				x = v1->inner_array[i] + v2->inner_array[i];
+				break;
+			case MULTIPLY : 
+				x = v1->inner_array[i] * v2->inner_array[i];
+				break;
+			case SUBTRACT : 
+				x = v1->inner_array[i] - v2->inner_array[i];
+				break;
+			case DIVIDE : 
+				// does not check for a denominator of 0, 
+				x = v1->inner_array[i] / v2->inner_array[i];
+				break;
+		}
+		v3->inner_array[i] = x;
+	}
+	
+	return v3;
+
+}
+
+vector * vec_add(vector * v1, vector * v2) {
+	return _vec_arithmetic(ADD, v1, v2);
+}
+
+vector * vec_multiply(vector * v1, vector * v2) {
+	return _vec_arithmetic(MULTIPLY, v1, v2);
+}
+
+vector * vec_subtract(vector * v1, vector * v2) {
+	return _vec_arithmetic(SUBTRACT, v1, v2);
+}
+
+vector * vec_divide(vector * v1, vector * v2) {
+	return _vec_arithmetic(DIVIDE, v1, v2);
+}
+
