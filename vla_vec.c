@@ -11,9 +11,9 @@ enum sizes { INITIAL_SIZE=5 };
 
 vector * _init_vector(int size)
 {
-    vector * v = malloc(sizeof(int)*size*2 + sizeof(vector));
-    v->max_capacity = size*2;
-    v->size = size;
+    vector * v = malloc(sizeof(int)*size + sizeof(vector));
+    v->max_capacity = size;
+    v->size = 0;
     return v;
 }
 
@@ -28,6 +28,7 @@ vector * init_sized_vector(int size)
 {
     vector * v;
     assert((v=_init_vector(size)) != NULL);
+    v->size = size;
     return v;
 }
 

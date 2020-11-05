@@ -10,7 +10,6 @@ int main(void)
 
     vector * v = init_vector();
     for (int i = 0; i < 11; ++i) {
-	// TODO fix push_back
         vec_push_back(v, i);
     }
     print_vec(v);
