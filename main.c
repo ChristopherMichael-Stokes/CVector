@@ -10,6 +10,7 @@ int main(void)
 
     vector * v = init_vector();
     for (int i = 0; i < 11; ++i) {
+	// TODO fix push_back
         vec_push_back(v, i);
     }
     print_vec(v);
@@ -35,14 +36,14 @@ int main(void)
     print_vec(v1);
     printf("v2:\t ");
     print_vec(v2);
-    vector * v3 = vec_add(v1, v2); 
+    vector * v3 = vec_add(v1, v2);
     printf("v1 + v2: ");
     print_vec(v3); free_vec(v3);
 
     v3 = vec_multiply(v1, v2);
     printf("v1 * v2: ");
     print_vec(v3); free_vec(v3);
-    
+
     v3 = vec_subtract(v1, v2);
     printf("v1 - v2: ");
     print_vec(v3); free_vec(v3);
@@ -52,6 +53,6 @@ int main(void)
     print_vec(v3); free_vec(v3);
 
     free_vec(v1); free_vec(v2);
-    
+
     return 0;
 }
