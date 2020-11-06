@@ -75,11 +75,12 @@ void vec_shrink_to_fit(vector * v)
     }
 }
 
-void print_vec(vector * v) {
-        for (int i = 0; i < v->size; ++i) {
-                printf("%d  ", v->inner_array[i]);
-        }
-        putchar('\n');
+void print_vec(vector * v) 
+{
+    for (int i = 0; i < v->size; ++i) {
+        printf("%d  ", v->inner_array[i]);
+    }
+    putchar('\n');
 }
 
 enum operation { ADD, MULTIPLY, SUBTRACT, DIVIDE };
@@ -137,4 +138,19 @@ vector * vec_divide(vector * v1, vector * v2)
 {
     return _vec_arithmetic(DIVIDE, v1, v2);
 }
+
+int vec_dot(vector * v1, vector * v2) 
+{
+    size_t size = v1->size < v2->size ? v1->size : v2->size;
+    int res = 0;
+    
+    for (int i = 0; i < size; ++i) {
+        res += v1->inner_array[i] * v2->inner_array[i];
+    }       
+
+    return res;
+
+}
+
+
 

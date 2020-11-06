@@ -21,6 +21,6 @@ vector * vec_add(vector * v1, vector * v2);
 vector * vec_multiply(vector * v1, vector * v2);
 vector * vec_subtract(vector * v1, vector * v2);
 vector * vec_divide(vector * v1, vector * v2);
-
+int vec_dot(vector * v1, vector * v2);
 
 #endif

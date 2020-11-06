@@ -50,6 +50,9 @@ int main(void)
     v3 = vec_divide(v2, v1);
     printf("v2 / v1: ");
     print_vec(v3); free_vec(v3);
+    
+    int z = vec_dot(v1, v2);
+    printf("v1 dot v2 = %d\n", z);
 
     free_vec(v1); free_vec(v2);
 
